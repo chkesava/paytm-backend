@@ -9,7 +9,18 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors({ origin: "https://kesava-scheduler.netlify.app" }));
+// Update CORS configuration to allow multiple origins
+const allowedOrigins = ["https://kesava-scheduler.netlify.app", "http://localhost:5173"];
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  }
+}));
+
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
