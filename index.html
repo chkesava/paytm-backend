@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paytm Backend API Documentation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    .route {
+      margin-bottom: 20px;
+      padding: 15px;
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    .method {
+      font-weight: bold;
+      color: #16a085;
+    }
+    .endpoint {
+      font-weight: bold;
+      color: #3498db;
+    }
+    .description {
+      margin: 5px 0;
+      font-style: italic;
+    }
+    .params, .example {
+      margin: 10px 0 0 20px;
+    }
+    .example {
+      background-color: #ecf0f1;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    footer {
+  background-color: #2c3e50;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.footer-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.footer-content p {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  margin: 8px 0;
+}
+
+ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+ul li a:hover {
+  text-decoration: underline;
+}
+
+.footer-item-name {
+  font-weight: bold;
+  color: #f39c12;
+}
+
+@media (max-width: 600px) {
+  .footer-content p {
+    font-size: 1.2rem;
+  }
+
+  ul li a {
+    font-size: 1rem;
+  }
+
+  .footer-item-name {
+    font-size: 1rem;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <h1>Welcome to the Paytm Backend API</h1>
+  <p>This page provides detailed documentation on how to use the available API endpoints.</p>
+
+  <h2>API Documentation</h2>
+
+  <!-- GET Counters Route -->
+  <div class="route">
+    <h3><span class="method">GET</span> <span class="endpoint">/api/counters</span></h3>
+    <p class="description">Fetches all counters with their current values.</p>
+    <div class="example">
+      <strong>Example Response:</strong>
+      <pre>
+{
+  "completed": 5,
+  "halfCompleted": 3,
+  "registeredNoPayment": 8,
+  "wasted": 2
+}
+      </pre>
+    </div>
+  </div>
+
+  <!-- PUT Counter Route -->
+  <div class="route">
+    <h3><span class="method">PUT</span> <span class="endpoint">/api/counters/:counter</span></h3>
+    <p class="description">Updates a specific counter by name.</p>
+    <div class="params">
+      <strong>Parameters:</strong>
+      <ul>
+        <li><code>counter</code> (path parameter) - The name of the counter to update, e.g., <code>completed</code>, <code>halfCompleted</code>, etc.</li>
+        <li><code>value</code> (body) - The new integer value for the counter.</li>
+      </ul>
+    </div>
+    <div class="example">
+      <strong>Example Request (Updating 'completed' counter):</strong>
+      <pre>
+PUT /api/counters/completed
+{
+  "value": 6
+}
+      </pre>
+    </div>
+  </div>
+
+  <!-- GET Entries Route -->
+  <div class="route">
+    <h3><span class="method">GET</span> <span class="endpoint">/api/entries</span></h3>
+    <p class="description">Retrieves all text entries.</p>
+    <div class="example">
+      <strong>Example Response:</strong>
+      <pre>
+[
+  { "_id": "6345345a33b8f3d1e0a17a5f", "text": "Sample entry 1" },
+  { "_id": "6345345a33b8f3d1e0a17a60", "text": "Sample entry 2" }
+]
+      </pre>
+    </div>
+  </div>
+
+  <!-- POST Entry Route -->
+  <div class="route">
+    <h3><span class="method">POST</span> <span class="endpoint">/api/entries</span></h3>
+    <p class="description">Adds a new text entry.</p>
+    <div class="params">
+      <strong>Body Parameters:</strong>
+      <ul>
+        <li><code>text</code> - A string containing the text for the new entry.</li>
+      </ul>
+    </div>
+    <div class="example">
+      <strong>Example Request:</strong>
+      <pre>
+POST /api/entries
+{
+  "text": "This is a new entry"
+}
+      </pre>
+    </div>
+  </div>
+
+  <!-- Route to View Status of Counters -->
+  <div class="route">
+    <h3><span class="method">GET</span> <span class="endpoint">/api/status</span></h3>
+    <p class="description">Returns a summary of counter statuses with specific user names and their assigned statuses.</p>
+    <div class="example">
+      <strong>Example Response:</strong>
+      <pre>
+[
+  {
+    "name": "User1",
+    "status": "completed"
+  },
+  {
+    "name": "User2",
+    "status": "halfCompleted"
+  }
+]
+      </pre>
+    </div>
+  </div>
+
+  <footer>
+    <div className="footer-content">
+      <p>Get in Touch</p>
+      <ul>
+        <li><span className="footer-item-name">Email:</span> <a href="mailto:kesava54@gmail.com">kesava54@gmail.com</a></li>
+        <li><span className="footer-item-name">LinkedIn Profile:</span> <a href="https://www.linkedin.com/in/kesava-chintha/" target="_blank" rel="noopener noreferrer">View my LinkedIn</a></li>
+        <li><span className="footer-item-name">GitHub Repository:</span> <a href="https://github.com/chkesava" target="_blank" rel="noopener noreferrer">Explore my GitHub</a></li>
+      </ul>
+    </div>
+  </footer>
+  
+  
+
+</body>
+</html>

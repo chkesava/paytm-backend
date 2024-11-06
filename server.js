@@ -5,6 +5,8 @@ const dotenv = require("dotenv");
 const counterRoutes = require("./routes/counters");
 const entryRoutes = require("./routes/entries");
 
+const path = require("path");
+
 dotenv.config();
 
 const app = express();
@@ -23,12 +25,23 @@ app.use(cors({
 
 app.use(express.json());
 
+app.use(express.static(__dirname));
+
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB connected"))
   .catch((error) => console.error("MongoDB connection error:", error));
 
 app.use("/api/counters", counterRoutes);
 app.use("/api/entries", entryRoutes);
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html")); // Make sure this is pointing to the correct file
+});
+
+console.log(path.join(__dirname, "index.html"));
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
