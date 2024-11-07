@@ -3,14 +3,10 @@ const Entry = require("../models/Entry");
 
 const router = express.Router();
 
+// Route to get all entries without pagination
 router.get("/", async (req, res) => {
   try {
-    const { page = 1, limit = 5 } = req.query;
-    const entries = await Entry.find()
-      .sort({ date: -1 })
-      .skip((page - 1) * limit)
-      .limit(Number(limit));
-
+    const entries = await Entry.find().sort({ date: -1 }); // No limit or skip applied
     res.json(entries);
   } catch (error) {
     res.status(500).json({ error: "Error fetching entries" });
